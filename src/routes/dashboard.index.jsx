@@ -10,7 +10,7 @@ import TransactionTable from "@/components/dashboard/TransactionTable";
 import Loader from "@/components/common/Loader";
 import { useData } from "@/context/DataContext";
 import { totalAssets, totalLiabilities, netWorth, healthScore, allocationByCategory } from "@/utils/calculations";
-import { netWorthHistory } from "@/data/chartData";
+import { netWorthSeries } from "@/data/chartData";
 
 export const Route = createFileRoute("/dashboard/")({
   head: () => ({
@@ -45,7 +45,7 @@ function Overview() {
 
       <div className="mt-6 grid gap-4 lg:grid-cols-3">
         <ChartCard title="Net worth trend" subtitle="Last 12 months" className="lg:col-span-2">
-          <NetWorthChart data={netWorthHistory} />
+          <NetWorthChart data={netWorthSeries["1y"]} />
         </ChartCard>
         <ChartCard title="Financial health" subtitle="Based on debt-to-asset ratio">
           <HealthGauge score={healthScore(assets, liabilities)} />
