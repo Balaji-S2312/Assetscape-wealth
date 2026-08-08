@@ -1,0 +1,84 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: assetscape
+      POSTGRES_USER: assetscape
+      POSTGRES_PASSWORD: assetscape
+    ports:
+      - "5432:5432"
+    volumes:
+      - assetscape_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U assetscape -d assetscape"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      PORT: 8080
+      PGHOST: postgres
+      PGPORT: 5432
+      PGDATABASE: assetscape
+      PGUSER: assetscape
+      PGPASSWORD: assetscape
+      JWT_SECRET: local-docker-secret-change-this-before-production-123456
+      APP_CORS_ALLOWED_ORIGINS: http://localhost:3000
+      COOKIE_SECURE: "false"
+      EXPOSE_RESET_TOKEN: "true"
+      SEED_DEMO_DATA: "true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  frontend:
+    build:
+      context: .
+      args:
+        VITE_API_URL: http://localhost:8080/api
+    environment:
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    profiles: ["monitoring"]
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  grafana:
+    image: grafana/grafana:11.4.0
+    profiles: ["monitoring"]
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - assetscape_grafana:/var/lib/grafana
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+
+volumes:
+  assetscape_postgres:
+  assetscape_grafana:

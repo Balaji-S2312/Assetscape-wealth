@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:assetscape;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+app:
+  security:
+    jwt-secret: test-secret-that-is-definitely-longer-than-thirty-two-bytes
+    expose-reset-token: true
