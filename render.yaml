@@ -1,0 +1,49 @@
+services:
+  # -------------------------------------------------------------
+  # Backend API (Spring Boot 3 + PostgreSQL + JWT)
+  # -------------------------------------------------------------
+  - type: web
+    name: assetscape-backend
+    runtime: docker
+    dockerfilePath: backend/Dockerfile
+    dockerContext: backend
+    plan: free
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: PGHOST
+        sync: false
+      - key: PGPORT
+        value: "5432"
+      - key: PGDATABASE
+        sync: false
+      - key: PGUSER
+        sync: false
+      - key: PGPASSWORD
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: SEED_DEMO_DATA
+        value: "true"
+      - key: EXPOSE_RESET_TOKEN
+        value: "true"
+      - key: APP_CORS_ALLOWED_ORIGINS
+        sync: false
+
+  # -------------------------------------------------------------
+  # Frontend UI (React + TanStack Start / Vite)
+  # -------------------------------------------------------------
+  - type: web
+    name: assetscape-frontend
+    runtime: docker
+    dockerfilePath: Dockerfile
+    dockerContext: .
+    plan: free
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: VITE_API_URL
+        sync: false
