@@ -5,6 +5,6 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: {
-    preset: "node-server",
+    preset: process.env.NITRO_PRESET || (process.env.VERCEL ? "vercel" : "node-server"),
   },
 });
