@@ -1,4 +1,10 @@
-const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:8080/api").replace(/\/$/, "");
+// VITE_API_URL is injected at build time by Vite.
+// The explicit production URL fallback ensures the client bundle always
+// targets the correct backend even when env injection order varies.
+const API_URL = (
+  import.meta.env.VITE_API_URL ||
+  "https://assetscape-backend.onrender.com/api"
+).replace(/\/$/, "");
 const TOKEN_KEY = "assetscape_access_token";
 const USER_KEY = "assetscape_user";
 
