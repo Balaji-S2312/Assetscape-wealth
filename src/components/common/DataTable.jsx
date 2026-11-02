@@ -1,5 +1,11 @@
 /** Generic responsive data table. Columns: { key, header, render, className, align } */
-export default function DataTable({ columns, rows, rowKey = (row) => row.id, onRowClick, caption }) {
+export default function DataTable({
+  columns,
+  rows,
+  rowKey = (row) => row.id,
+  onRowClick,
+  caption,
+}) {
   return (
     <div className="w-full overflow-x-auto">
       <table className="w-full min-w-[42rem] border-collapse text-sm">

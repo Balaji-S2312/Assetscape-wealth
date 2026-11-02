@@ -2,7 +2,12 @@ import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import { useChartAnimation, chartSignature } from "@/hooks/useChartAnimation";
 
 /** Compact sparkline used inside cards and tables. */
-export default function Sparkline({ data, dataKey = "value", color = "var(--chart-1)", height = 48 }) {
+export default function Sparkline({
+  data,
+  dataKey = "value",
+  color = "var(--chart-1)",
+  height = 48,
+}) {
   const gradientId = `spark-${dataKey}-${color.replace(/[^a-z0-9]/gi, "")}`;
   const scope = useChartAnimation(chartSignature(data, dataKey));
 

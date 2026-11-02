@@ -36,12 +36,18 @@ export function SidebarNav({ collapsed = false, onNavigate }) {
           onClick={onNavigate}
           activeOptions={{ exact: Boolean(item.exact) }}
           activeProps={{ className: "brand-gradient text-primary-foreground" }}
-          inactiveProps={{ className: "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground" }}
+          inactiveProps={{
+            className: "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground",
+          }}
           className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors"
           title={item.label}
         >
           <item.icon className="h-4.5 w-4.5 shrink-0" aria-hidden="true" />
-          {collapsed ? <span className="sr-only">{item.label}</span> : <span className="truncate">{item.label}</span>}
+          {collapsed ? (
+            <span className="sr-only">{item.label}</span>
+          ) : (
+            <span className="truncate">{item.label}</span>
+          )}
         </Link>
       ))}
     </nav>

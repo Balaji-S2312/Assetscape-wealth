@@ -10,8 +10,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const stored = readStore(STORAGE_KEYS.theme, null);
     const initial =
-      stored ??
-      (window.matchMedia?.("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      stored ?? (window.matchMedia?.("(prefers-color-scheme: light)").matches ? "light" : "dark");
     setTheme(initial);
     setReady(true);
   }, []);
@@ -28,7 +27,10 @@ export function ThemeProvider({ children }) {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   }, []);
 
-  const value = useMemo(() => ({ theme, setTheme, toggleTheme, ready }), [theme, toggleTheme, ready]);
+  const value = useMemo(
+    () => ({ theme, setTheme, toggleTheme, ready }),
+    [theme, toggleTheme, ready],
+  );
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 

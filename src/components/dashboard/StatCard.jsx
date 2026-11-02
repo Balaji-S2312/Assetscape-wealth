@@ -27,9 +27,7 @@ export default function StatCard({
     const node = numberRef.current;
     if (!node) return undefined;
     if (reduced) {
-      node.textContent = percent
-        ? `${Number(value).toFixed(1)}%`
-        : formatCurrency(value, currency);
+      node.textContent = percent ? `${Number(value).toFixed(1)}%` : formatCurrency(value, currency);
       return undefined;
     }
     const ctx = gsap.context(() => {
@@ -61,10 +59,7 @@ export default function StatCard({
             : "text-primary bg-primary/12";
 
   return (
-    <article
-      data-stat-card
-      className="glass press group relative overflow-hidden rounded-2xl p-5"
-    >
+    <article data-stat-card className="glass press group relative overflow-hidden rounded-2xl p-5">
       <div className="pointer-events-none absolute -right-8 -top-10 h-24 w-24 rounded-full glow-bg opacity-70" />
       <div className="flex items-start justify-between gap-3">
         <p className="min-w-0 text-sm font-medium text-muted-foreground">{label}</p>

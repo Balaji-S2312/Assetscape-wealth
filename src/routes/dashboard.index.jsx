@@ -9,14 +9,23 @@ import HealthGauge from "@/components/charts/HealthGauge";
 import TransactionTable from "@/components/dashboard/TransactionTable";
 import Loader from "@/components/common/Loader";
 import { useData } from "@/context/DataContext";
-import { totalAssets, totalLiabilities, netWorth, healthScore, allocationByCategory } from "@/utils/calculations";
+import {
+  totalAssets,
+  totalLiabilities,
+  netWorth,
+  healthScore,
+  allocationByCategory,
+} from "@/utils/calculations";
 import { netWorthSeries } from "@/data/chartData";
 
 export const Route = createFileRoute("/dashboard/")({
   head: () => ({
     meta: [
       { title: "Overview — AssetSphere Dashboard" },
-      { name: "description", content: "Net worth, assets, liabilities and financial health overview." },
+      {
+        name: "description",
+        content: "Net worth, assets, liabilities and financial health overview.",
+      },
       { property: "og:title", content: "Overview — AssetSphere Dashboard" },
       { property: "og:description", content: "Your net worth and portfolio health at a glance." },
     ],
@@ -37,9 +46,19 @@ function Overview() {
       <PageHeader title="Overview" description="A live snapshot of everything you own and owe." />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <StatCard label="Net worth" value={netWorth(assets, liabilities)} icon={TrendingUp} tone="primary" />
+        <StatCard
+          label="Net worth"
+          value={netWorth(assets, liabilities)}
+          icon={TrendingUp}
+          tone="primary"
+        />
         <StatCard label="Total assets" value={assetsTotal} icon={Coins} tone="positive" />
-        <StatCard label="Total liabilities" value={liabilitiesTotal} icon={Landmark} tone="negative" />
+        <StatCard
+          label="Total liabilities"
+          value={liabilitiesTotal}
+          icon={Landmark}
+          tone="negative"
+        />
         <StatCard label="Liquid holdings" value={assetsTotal * 0.18} icon={Wallet} tone="gold" />
       </div>
 

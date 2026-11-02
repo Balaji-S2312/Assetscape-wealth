@@ -24,7 +24,11 @@ export default function MobileDrawer({ open, onClose }) {
 
   return (
     <div className="fixed inset-0 z-[80] lg:hidden no-print">
-      <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-background/70 backdrop-blur-sm"
+        onClick={onClose}
+        aria-hidden="true"
+      />
       <div
         role="dialog"
         aria-modal="true"

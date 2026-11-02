@@ -13,7 +13,13 @@ import { axisProps, gridProps } from "@/components/charts/chartTheme";
 import { useChartAnimation, chartSignature } from "@/hooks/useChartAnimation";
 
 /** Multi-series line chart. `lines` = [{ dataKey, name, color }] */
-export default function LineTrendChart({ data, lines, height = 280, currency = true, suffix = "" }) {
+export default function LineTrendChart({
+  data,
+  lines,
+  height = 280,
+  currency = true,
+  suffix = "",
+}) {
   const scope = useChartAnimation(chartSignature(data, lines.map((l) => l.dataKey).join(",")));
 
   return (

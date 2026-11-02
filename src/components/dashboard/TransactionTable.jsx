@@ -86,7 +86,5 @@ export default function TransactionTable({ transactions, onEdit, onDelete, compa
     });
   }
 
-  return (
-    <DataTable columns={columns} rows={transactions} caption="Transaction history" />
-  );
+  return <DataTable columns={columns} rows={transactions} caption="Transaction history" />;
 }

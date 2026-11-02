@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: assetscape-wealth
+    runtime: node
+    plan: free
+    region: oregon
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        value: postgresql://assetscape_user:AJBhkiSYnxXHdgAoYoHoNWSnBF1eiVWw@dpg-dbk3kmnlk1mc73aojblg-a.oregon-postgres.render.com/assetscape_wealth?sslmode=require
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000

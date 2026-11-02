@@ -43,7 +43,8 @@ export default function HealthGauge({ score = 0, size = 168, label = "Financial 
     return () => ctx.revert();
   }, [clamped, circumference, reduced]);
 
-  const tone = clamped >= 70 ? "var(--positive)" : clamped >= 45 ? "var(--gold)" : "var(--negative)";
+  const tone =
+    clamped >= 70 ? "var(--positive)" : clamped >= 45 ? "var(--gold)" : "var(--negative)";
   const verdict = clamped >= 70 ? "Strong" : clamped >= 45 ? "Stable" : "Needs attention";
 
   return (

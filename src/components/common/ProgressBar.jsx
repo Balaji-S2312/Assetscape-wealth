@@ -13,7 +13,11 @@ export default function ProgressBar({ value = 0, tone = "primary", label, showVa
     <div className="w-full">
       {(label || showValue) && (
         <div className="mb-1.5 flex items-center justify-between gap-2 text-xs">
-          {label ? <span className="min-w-0 truncate text-muted-foreground">{label}</span> : <span />}
+          {label ? (
+            <span className="min-w-0 truncate text-muted-foreground">{label}</span>
+          ) : (
+            <span />
+          )}
           {showValue ? <span className="shrink-0 font-semibold">{clamped.toFixed(0)}%</span> : null}
         </div>
       )}

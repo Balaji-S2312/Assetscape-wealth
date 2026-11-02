@@ -39,7 +39,6 @@ Do not use:
 * AI APIs
 * API keys
 * Serverless functions
-* Lovable Cloud backend features
 
 All React component files must use the `.jsx` extension.
 
@@ -678,7 +677,6 @@ Ensure:
 * No external API call exists
 * No Supabase configuration exists
 * No Firebase configuration exists
-* No Lovable Cloud dependency exists
 * No unfinished placeholder page exists
 * No broken navigation exists
 * No non-functional primary button exists
@@ -689,15 +687,6 @@ Before completing the project, review the entire codebase and remove any automat
 
 The final result must be a pure React JavaScript frontend with rich GSAP animations, realistic mock data, functional interactions, and a premium fintech appearance.
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/a9ce3db9-5117-4936-86af-74a06c39543c).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 

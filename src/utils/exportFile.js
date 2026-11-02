@@ -11,7 +11,10 @@ function triggerDownload(blob, filename) {
 }
 
 export function downloadJson(data, filename) {
-  triggerDownload(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }), filename);
+  triggerDownload(
+    new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }),
+    filename,
+  );
 }
 
 export function downloadCsv(rows, filename) {

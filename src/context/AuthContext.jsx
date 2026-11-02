@@ -16,7 +16,10 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     setSession(authService.getSession());
-    authService.getProfile().then(setProfile).catch(() => {});
+    authService
+      .getProfile()
+      .then(setProfile)
+      .catch(() => {});
     setInitialising(false);
   }, []);
 

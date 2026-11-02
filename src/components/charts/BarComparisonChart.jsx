@@ -13,7 +13,13 @@ import { axisProps, gridProps } from "@/components/charts/chartTheme";
 import { useChartAnimation, chartSignature } from "@/hooks/useChartAnimation";
 
 /** Grouped bar chart. `bars` = [{ dataKey, name, color }] */
-export default function BarComparisonChart({ data, bars, height = 280, suffix = "", currency = true }) {
+export default function BarComparisonChart({
+  data,
+  bars,
+  height = 280,
+  suffix = "",
+  currency = true,
+}) {
   const scope = useChartAnimation(chartSignature(data, bars.map((b) => b.dataKey).join(",")));
 
   return (

@@ -38,11 +38,7 @@ export default function ChartTooltip({ active, payload, label, currencyKeys = []
         {payload.map((entry) => {
           const isCurrency = currencyKeys.length === 0 || currencyKeys.includes(entry.dataKey);
           return (
-            <li
-              key={entry.dataKey ?? entry.name}
-              data-tip-row
-              className="flex items-center gap-2"
-            >
+            <li key={entry.dataKey ?? entry.name} data-tip-row className="flex items-center gap-2">
               <span
                 className="h-2 w-2 shrink-0 rounded-full"
                 style={{ backgroundColor: entry.color ?? entry.payload?.fill }}

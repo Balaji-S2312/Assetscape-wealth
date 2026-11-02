@@ -17,11 +17,10 @@ export function useChartAnimation(signature = "", { delay = 0 } = {}) {
     if (!root || reduced) return undefined;
 
     let ctx;
-    let raf1;
     let raf2;
 
     // Wait two frames so ResponsiveContainer has measured + painted the series.
-    raf1 = requestAnimationFrame(() => {
+    const raf1 = requestAnimationFrame(() => {
       raf2 = requestAnimationFrame(() => {
         ctx = gsap.context(() => {
           const q = (sel) => Array.from(root.querySelectorAll(sel));
@@ -149,7 +148,8 @@ export function useChartAnimation(signature = "", { delay = 0 } = {}) {
 export function chartSignature(...parts) {
   return parts
     .map((p) => {
-      if (Array.isArray(p)) return `${p.length}:${JSON.stringify(p[0] ?? "")}${JSON.stringify(p[p.length - 1] ?? "")}`;
+      if (Array.isArray(p))
+        return `${p.length}:${JSON.stringify(p[0] ?? "")}${JSON.stringify(p[p.length - 1] ?? "")}`;
       if (p && typeof p === "object") return JSON.stringify(p);
       return String(p);
     })

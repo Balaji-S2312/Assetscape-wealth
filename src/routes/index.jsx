@@ -20,7 +20,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "AssetSphere — Personal Asset Management" },
       {
         property: "og:description",
-        content: "Track net worth, assets, liabilities and financial health in one polished dashboard.",
+        content:
+          "Track net worth, assets, liabilities and financial health in one polished dashboard.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -30,16 +31,43 @@ export const Route = createFileRoute("/")({
 });
 
 const FEATURES = [
-  { icon: PieChart, title: "Portfolio clarity", text: "Every asset class layered into one allocation view." },
-  { icon: TrendingUp, title: "Net worth trends", text: "Twelve months of history, brewed into insight." },
-  { icon: ShieldCheck, title: "Health scoring", text: "Debt-to-asset ratio and liquidity at a glance." },
+  {
+    icon: PieChart,
+    title: "Portfolio clarity",
+    text: "Every asset class layered into one allocation view.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Net worth trends",
+    text: "Twelve months of history, brewed into insight.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Health scoring",
+    text: "Debt-to-asset ratio and liquidity at a glance.",
+  },
 ];
 
 const TILES = [
-  { icon: Landmark, label: "Property", value: "£268,400", depth: "translateZ(70px) rotateY(-9deg)" },
-  { icon: TrendingUp, label: "Investments", value: "£142,900", depth: "translateZ(30px) rotateY(-3deg)" },
+  {
+    icon: Landmark,
+    label: "Property",
+    value: "£268,400",
+    depth: "translateZ(70px) rotateY(-9deg)",
+  },
+  {
+    icon: TrendingUp,
+    label: "Investments",
+    value: "£142,900",
+    depth: "translateZ(30px) rotateY(-3deg)",
+  },
   { icon: Gem, label: "Gold & metals", value: "£48,150", depth: "translateZ(52px) rotateY(6deg)" },
-  { icon: Coffee, label: "Everyday cash", value: "£26,800", depth: "translateZ(14px) rotateY(11deg)" },
+  {
+    icon: Coffee,
+    label: "Everyday cash",
+    value: "£26,800",
+    depth: "translateZ(14px) rotateY(11deg)",
+  },
 ];
 
 function Landing() {

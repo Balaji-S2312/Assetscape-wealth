@@ -32,7 +32,9 @@ export default function NetWorthChart({ data, height = 280, showAssets = false }
           <CartesianGrid {...gridProps} />
           <XAxis dataKey="label" {...axisProps} />
           <YAxis {...axisProps} width={64} tickFormatter={(v) => `${Math.round(v / 1000)}k`} />
-          <Tooltip content={<ChartTooltip currencyKeys={["netWorth", "assets", "liabilities"]} />} />
+          <Tooltip
+            content={<ChartTooltip currencyKeys={["netWorth", "assets", "liabilities"]} />}
+          />
           {showAssets ? (
             <Area
               type="monotone"

@@ -1,11 +1,6 @@
 import { mockAssets } from "@/data/assets";
 import { STORAGE_KEYS, readStore, writeStore, delay, makeId } from "@/utils/storage";
 
-/**
- * Mock asset service.
- * Promise-based with simulated delay so it can be swapped for a real
- * HTTP client later without changing any calling component.
- */
 function load() {
   return readStore(STORAGE_KEYS.assets, null) ?? mockAssets;
 }
@@ -16,17 +11,44 @@ function save(list) {
 }
 
 export async function getAssets() {
-  await delay(380);
+  try {
+    const res = await fetch("/api/assets");
+    if (res.ok) {
+      const live = await res.json();
+      if (Array.isArray(live) && live.length > 0) {
+        save(live);
+        return live;
+      }
+    }
+  } catch {
+    /* backend unavailable, fall back to storage */
+  }
+  await delay(100);
   return load();
 }
 
 export async function getAssetById(id) {
-  await delay(240);
-  return load().find((asset) => asset.id === id) ?? null;
+  const assets = await getAssets();
+  return assets.find((a) => a.id === id) ?? null;
 }
 
 export async function createAsset(payload) {
-  await delay(420);
+  try {
+    const res = await fetch("/api/assets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      const created = await res.json();
+      const current = load();
+      save([created, ...current]);
+      return created;
+    }
+  } catch {
+    /* fallback */
+  }
+  await delay(200);
   const asset = {
     ...payload,
     id: makeId("AST"),
@@ -37,20 +59,40 @@ export async function createAsset(payload) {
 }
 
 export async function updateAsset(id, payload) {
-  await delay(420);
+  try {
+    const res = await fetch(`/api/assets/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      const list = load().map((a) => (a.id === id ? { ...a, ...updated } : a));
+      save(list);
+      return updated;
+    }
+  } catch {
+    /* fallback */
+  }
+  await delay(200);
   const list = load().map((asset) => (asset.id === id ? { ...asset, ...payload, id } : asset));
   save(list);
   return list.find((asset) => asset.id === id);
 }
 
 export async function deleteAsset(id) {
-  await delay(320);
+  try {
+    await fetch(`/api/assets/${id}`, { method: "DELETE" });
+  } catch {
+    /* fallback */
+  }
+  await delay(150);
   save(load().filter((asset) => asset.id !== id));
   return id;
 }
 
 export async function resetAssets() {
-  await delay(200);
+  await delay(100);
   return save(mockAssets);
 }
 

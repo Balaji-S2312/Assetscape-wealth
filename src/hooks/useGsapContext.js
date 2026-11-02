@@ -16,7 +16,6 @@ export function useGsapContext(setup, deps = []) {
     if (reduced || !scope.current) return undefined;
     const ctx = gsap.context(setup, scope);
     return () => ctx.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduced, ...deps]);
 
   return scope;

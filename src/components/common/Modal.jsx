@@ -5,7 +5,15 @@ import gsap from "gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /** Keyboard-accessible modal: Esc closes, focus is trapped, GSAP entrance. */
-export default function Modal({ open, onClose, title, description, children, footer, size = "md" }) {
+export default function Modal({
+  open,
+  onClose,
+  title,
+  description,
+  children,
+  footer,
+  size = "md",
+}) {
   const panelRef = useRef(null);
   const reduced = useReducedMotion();
 
@@ -38,7 +46,12 @@ export default function Modal({ open, onClose, title, description, children, foo
 
     document.addEventListener("keydown", onKeyDown);
     const timer = setTimeout(() => {
-      panelRef.current?.querySelector("[data-autofocus]")?.focus?.() ?? panelRef.current?.focus();
+      const autoFocusEl = panelRef.current?.querySelector("[data-autofocus]");
+      if (autoFocusEl) {
+        autoFocusEl.focus();
+      } else {
+        panelRef.current?.focus();
+      }
     }, 30);
 
     return () => {
@@ -64,7 +77,13 @@ export default function Modal({ open, onClose, title, description, children, foo
   if (!open || typeof document === "undefined") return null;
 
   const width =
-    size === "lg" ? "max-w-3xl" : size === "sm" ? "max-w-sm" : size === "xl" ? "max-w-5xl" : "max-w-lg";
+    size === "lg"
+      ? "max-w-3xl"
+      : size === "sm"
+        ? "max-w-sm"
+        : size === "xl"
+          ? "max-w-5xl"
+          : "max-w-lg";
 
   return createPortal(
     <div className="fixed inset-0 z-[90] flex items-end justify-center p-0 sm:items-center sm:p-4 no-print">
